@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Ký - MyShop</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Thanh điều hướng -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>MyShop</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Trang Chủ</a></li>
+                    <li><a href="product.html">Sản Phẩm</a></li>
+                    <li><a href="#">Giới Thiệu</a></li>
+                    <li><a href="#">Liên Hệ</a></li>
+                    <li><a href="login.html">Đăng Nhập</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Form Đăng Ký -->
+    <section class="register-section">
+        <div class="container">
+            <h2>Đăng Ký</h2>
+            <div id="message" style="color: green; font-weight: bold;"></div>
+            <form id="registerForm" action="RegisterHandler.aspx" method="post">
+                <label for="username">Tên Đăng Nhập:</label>
+                <input type="text" id="username" name="username" placeholder="Nhập tên đăng nhập của bạn" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Nhập email của bạn" required>
+
+                <label for="password">Mật Khẩu:</label>
+                <input type="password" id="password" name="password" placeholder="Nhập mật khẩu của bạn" required>
+
+                <label for="confirm-password">Xác Nhận Mật Khẩu:</label>
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="Xác nhận mật khẩu của bạn" required>
+
+                <button type="submit" class="btn">Đăng Ký</button>
+                <p>Bạn đã có tài khoản? <a href="login.html">Đăng nhập ngay</a></p>
+            </form>
+
+
+        </div>
+    </section>
+
+    <script>
+        // Kiểm tra tham số trong URL
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('success')) {
+            const messageDiv = document.getElementById('message');
+            messageDiv.innerText = 'Đăng ký thành công! Bạn có thể đăng nhập ngay.';
+        } else if (urlParams.has('error')) {
+            const errorCode = urlParams.get('error');
+            switch (errorCode) {
+                case '1':
+                    var messageDiv = document.getElementById('message');
+                    messageDiv.innerText = 'Mật khẩu không khớp!';
+                    messageDiv.style.color = 'red';
+                    break;
+                case '2':
+                    var messageDiv = document.getElementById('message');
+                    messageDiv.innerText = 'Đã xảy ra lỗi kết nối đến cơ sở dữ liệu!';
+                    messageDiv.style.color = 'red';
+                    break;
+                case '3':
+                    var messageDiv = document.getElementById('message');
+                    messageDiv.innerText = 'Tên đăng nhập hoặc email đã tồn tại!';
+                    messageDiv.style.color = 'red';
+                    break;
+                default:
+                    var messageDiv = document.getElementById('message');
+                    messageDiv.innerText = 'Có lỗi xảy ra, vui lòng thử lại!';
+                    messageDiv.style.color = 'red';
+                    break;
+            }
+        }
+    </script>
+
+</body>
+</html>
