@@ -5,7 +5,7 @@
     font-family: 'Poppins', sans-serif;
 }
 h2, p {
-    color: black; /* Hoặc màu khác mà bạn muốn */
+    color: black; 
 }
 html, body {
     height: 100%;
@@ -19,18 +19,18 @@ html, body {
     width: 90%;
     max-width: 1200px;
     margin: 0 auto;
-    flex: 1; /* Để phần nội dung chiếm khoảng trống giữa header và footer */
+    flex: 1; 
 }
 
 header {
     background-color: #333;
     color: #fff;
     padding: 15px 0;
-    position: fixed; /* Đặt vị trí cố định cho header */
+    position: fixed; 
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1000; /* Đảm bảo header luôn ở trên cùng */
+    z-index: 1000; 
     text-align: center;
 }
 
@@ -163,7 +163,7 @@ header {
     width: 100%;
     position: relative;
     bottom: 0;
-    margin-top: auto; /* Đẩy footer xuống cuối trang */
+    margin-top: auto; 
 }
 .products-grid {
     display: grid;
@@ -213,15 +213,15 @@ header {
 
 .categories-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 4 cột */
+    grid-template-columns: repeat(5, 1fr); 
     gap: 20px;
     text-align: center;
 }
 
 .category-item img {
-    width: 100px; /* Điều chỉnh kích thước hình ảnh */
-    height: 100px; /* Điều chỉnh kích thước hình ảnh */
-    object-fit: contain; /* Đảm bảo ảnh không bị cắt */
+    width: 100px; 
+    height: 100px; 
+    object-fit: contain; 
     margin-bottom: 10px;
 }
 
