@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 
@@ -76,14 +77,25 @@
                 <img src="resources/img/post-1.jpg" alt="" class="post-img">
             </div> -->
             
-            <textarea type="text" class="article" placeholder="Hãy bình luận..."></textarea>
+            <!-- <textarea type="text" class="article" placeholder="Hãy bình luận..."></textarea> -->
+            <form>
+                <label for="size">Chọn kích cỡ giày :</label><br>
+                <input type="text" id="size" name="size"><br>
+                <label for="num_product">Nhập số lượng muốn mua:</label><br>
+                <input type="text" id="num_product" name="num_product">
+            </form> 
+
+            <button>
+                <p>Mua sản phẩm</p>
+                <i class="fa fa-shopping-cart"></i>
+            </button>
         </section>
     
         <!--COMMENT-->
-        <section class="post-content">
+        <!-- <section class="post-content">
             <p class="post-text">Đánh giá chung : 4.5/5</p>
             <p class="post-text">Đánh giá của bạn : </p>
-        </section>
+        </section> -->
         <!--FOOTER-->
         <div class="footer container">
             <p>&#169 CollRoom, 2024</p>
