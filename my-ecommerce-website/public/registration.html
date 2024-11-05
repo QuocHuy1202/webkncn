@@ -32,7 +32,7 @@
         <div class="container">
             <h2>Đăng Ký</h2>
             <div id="message" style="color: green; font-weight: bold;"></div>
-            <form id="registerForm" action="RegisterHandler.aspx" method="post">
+            <form id="registerForm">
                 <label for="username">Tên Đăng Nhập:</label>
                 <input type="text" id="username" name="username" placeholder="Nhập tên đăng nhập của bạn" required>
 
@@ -48,12 +48,21 @@
                 <button type="submit" class="btn">Đăng Ký</button>
                 <p>Bạn đã có tài khoản? <a href="login.html">Đăng nhập ngay</a></p>
             </form>
-
-
         </div>
     </section>
 
     <script>
+        // Lưu sẵn vài tài khoản vào localStorage nếu chưa có tài khoản nào
+        const initialAccounts = [
+            { username: 'user1', email: 'user1@example.com', password: 'password1', role: 'user' },
+            { username: 'user2', email: 'user2@example.com', password: 'password2', role: 'user' },
+            { username: 'admin', email: 'admin@example.com', password: 'adminpass', role: 'admin' }
+        ];
+
+        if (!localStorage.getItem('accounts')) {
+            localStorage.setItem('accounts', JSON.stringify(initialAccounts));
+        }
+
         // Kiểm tra tham số trong URL
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.has('success')) {
@@ -61,29 +70,66 @@
             messageDiv.innerText = 'Đăng ký thành công! Bạn có thể đăng nhập ngay.';
         } else if (urlParams.has('error')) {
             const errorCode = urlParams.get('error');
+            const messageDiv = document.getElementById('message');
             switch (errorCode) {
                 case '1':
-                    var messageDiv = document.getElementById('message');
                     messageDiv.innerText = 'Mật khẩu không khớp!';
                     messageDiv.style.color = 'red';
                     break;
                 case '2':
-                    var messageDiv = document.getElementById('message');
                     messageDiv.innerText = 'Đã xảy ra lỗi kết nối đến cơ sở dữ liệu!';
                     messageDiv.style.color = 'red';
                     break;
                 case '3':
-                    var messageDiv = document.getElementById('message');
                     messageDiv.innerText = 'Tên đăng nhập hoặc email đã tồn tại!';
                     messageDiv.style.color = 'red';
                     break;
                 default:
-                    var messageDiv = document.getElementById('message');
                     messageDiv.innerText = 'Có lỗi xảy ra, vui lòng thử lại!';
                     messageDiv.style.color = 'red';
                     break;
             }
         }
+
+        document.getElementById('registerForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Ngăn không cho form gửi đi
+
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const messageDiv = document.getElementById('message');
+
+            // Kiểm tra mật khẩu
+            if (password !== confirmPassword) {
+                messageDiv.innerText = 'Mật khẩu không khớp!';
+                messageDiv.style.color = 'red';
+                return;
+            }
+
+            // Lấy danh sách tài khoản từ localStorage
+            const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+
+            // Kiểm tra xem tài khoản đã tồn tại chưa
+            const accountExists = accounts.some(acc => acc.username === username || acc.email === email);
+            if (accountExists) {
+                messageDiv.innerText = 'Tên đăng nhập hoặc email đã tồn tại!';
+                messageDiv.style.color = 'red';
+                return;
+            }
+
+            // Lưu tài khoản mới vào localStorage
+            const newAccount = { username: username, email: email, password: password, role: 'user' };
+            accounts.push(newAccount);
+            localStorage.setItem('accounts', JSON.stringify(accounts)); // Lưu lại danh sách tài khoản
+
+            // Hiển thị thông báo thành công và chuyển hướng
+            messageDiv.innerText = 'Đăng ký thành công! Bạn có thể đăng nhập ngay.';
+            messageDiv.style.color = 'green';
+
+            // Chuyển hướng đến trang đăng nhập sau 2 giây
+            
+        });
     </script>
 
 </body>

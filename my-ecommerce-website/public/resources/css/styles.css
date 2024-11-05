@@ -344,16 +344,6 @@ header.shadow .logo {
     text-align: justify;
 }
 
-.post-content form{
-    align-self: center;
-    display: flex;
-    flex-direction: row;
-    margin: 10px;
-}
-.post-content form input{
-    max-width: 30px;
-    margin : 0 20px
-}
 /*-----SHARE-----*/
 
 .share {

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Đơn Hàng - MyShop</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>MyShop</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Trang Chủ</a></li>
+                    <li><a href=#>Quản Trị</a></li>
+                    <li><a href="index.html">Đăng Xuất</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="admin-section">
+        <div class="container">
+            <h2>Quản Lý Đơn Hàng</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mã Đơn Hàng</th>
+                        <th>ID Thanh Toán</th>
+                        <th>ID Khách Hàng</th>
+                        <th>Giá</th>
+                        <th>Ngày Đặt</th>
+                        <th>Địa Chỉ</th>
+                        <th>Trạng Thái</th>
+                        <th>Thao Tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        <td>OD001</td>
+                        <td>PAY001</td>
+                        <td>CUS001</td>
+                        <td>500.000 VNĐ</td>
+                        <td>2024-11-01</td>
+                        <td>3 Lê Đức Thọ</td>
+                        <td>Đã Giao</td>
+                        <td>
+                            <button class="btn detail-btn" data-order-id="OD001">Xem Chi Tiết</button>
+                            <button class="btn edit-btn">Chỉnh Sửa</button>
+                            <button class="btn delete-btn">Xóa</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>OD002</td>
+                        <td>PAY002</td>
+                        <td>CUS002</td>
+                        <td>300.000 VNĐ</td>
+                        <td>2024-11-02</td>
+                        <td>1 Võ Văn Ngân</td>
+                        <td>Chưa giao</td>
+                        <td>
+                            <button class="btn detail-btn" data-order-id="OD002">Xem Chi Tiết</button>
+                            <button class="btn edit-btn">Chỉnh Sửa</button>
+                            <button class="btn delete-btn">Xóa</button>
+                        </td>
+                    </tr>
+    
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Chi Tiết Đơn Hàng</h2>
+            <table id="order-details-table">
+                <thead>
+                    <tr>
+                        <th>Tên Sản Phẩm</th>
+                        <th>Số Lượng</th>
+                        <th>Giá</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Chi tiết sản phẩm sẽ được thêm vào đây -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        
+        const orderDetailsData = {
+            'OD001': [
+                { productName: 'Áo Thun', quantity: 2, price: '100.000 VNĐ' },
+                { productName: 'Quần Jeans', quantity: 1, price: '200.000 VNĐ' }
+            ],
+            'OD002': [
+                { productName: 'Giày Sneaker', quantity: 1, price: '300.000 VNĐ' }
+            ]
+        };
+
+       
+        document.querySelectorAll('.detail-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                
+                const orderId = button.getAttribute('data-order-id');
+                const orderDetails = orderDetailsData[orderId] || [];
+                const orderDetailsTableBody = document.getElementById('order-details-table').getElementsByTagName('tbody')[0];
+                orderDetailsTableBody.innerHTML = ''; 
+
+                orderDetails.forEach(detail => {
+                    const newRow = orderDetailsTableBody.insertRow();
+                    newRow.insertCell(0).innerText = detail.productName;
+                    newRow.insertCell(1).innerText = detail.quantity;
+                    newRow.insertCell(2).innerText = detail.price;
+                });
+
+                const modal = document.getElementById("myModal");
+                modal.style.display = "block"; 
+            });
+        });
+
+        document.querySelectorAll('.edit-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                alert('Chức năng chỉnh sửa đang được phát triển!');
+            });
+        });
+
+        document.querySelectorAll('.delete-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const row = button.closest('tr');
+                if (confirm('Bạn có chắc chắn muốn xóa đơn hàng này?')) {
+                    row.remove(); 
+                }
+            });
+        });
+
+       
+        const modalCloseButton = document.getElementsByClassName("close")[0];
+        modalCloseButton.onclick = function() {
+            const modal = document.getElementById("myModal");
+            modal.style.display = "none"; 
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById("myModal");
+            if (event.target == modal) {
+                modal.style.display = "none"; 
+            }
+        }
+    </script>
+</body>
+</html>

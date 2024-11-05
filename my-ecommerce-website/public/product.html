@@ -13,15 +13,15 @@
     <header>
         <div class="container">
             <div class="logo">
-                <h1>  MyShop</h1>
+                <h1>MyShop</h1>
             </div>
             <nav>
                 <ul>
-                    <li><a href="Index.html">Trang Chủ</a></li>
+                    <li><a href="index.html">Trang Chủ</a></li>
                     <li><a href="#">Sản Phẩm</a></li>
                     <li><a href="#">Giới Thiệu</a></li>
                     <li><a href="#">Liên Hệ</a></li>
-                    <li><a href="login.html">Đăng Nhập</a></li>
+                    <li id="authLink"><a href="login.html">Đăng Nhập</a></li>
                 </ul>
             </nav>
         </div>
@@ -63,39 +63,69 @@
         <div class="container">
             <h2 class="section-title">Sản Phẩm Nổi Bật</h2>
             <div class="products-grid">
-                <div class="product-item">
-                    <img src="product1.jpg" alt="Sản phẩm 1">
-                    <h3 class="product-name">Sản phẩm 1</h3>
-                    <p class="product-price">500,000 VND</p>
+                    
+                <div class="post-box sneaker-rep-1-1">
+                    <img src="resources/img/post-6.jpg" alt="" class="post-img">
+                    <h2 class="category">Sneaker Rep 1:1</h2>
+                    <h2 class="category">LV Louis Vuition đen</h2>
+                    
+                    <a href="post.html" class="post-title">
+                        Mua sản phẩm
+                    </a>
+                    <span class="post-date"></span>
+                    <p class="post-description">
+                        500.000đ
+                    </p>
                 </div>
-                <div class="product-item">
-                    <img src="product1.jpg" alt="Sản phẩm 2">
-                    <h3 class="product-name">Sản phẩm 2</h3>
-                    <p class="product-price">750,000 VND</p>
+                <div class="post-box sneaker-rep-1-1">
+                    <img src="resources/img/post-7.jpg" alt="" class="post-img">
+                    <h2 class="category">Sneaker Rep 1:1</h2>
+                    <h2 class="category">NIKE AIR JORDAN 1 Retro Low Navy</h2>
+                    
+                    <a href="post.html" class="post-title">
+                        Mua sản phẩm
+                    </a>
+                    <span class="post-date"></span>
+                    <p class="post-description">
+                        500.000đ
+                    </p>
                 </div>
-                <div class="product-item">
-                    <img src="product1.jpg" alt="Sản phẩm 3">
-                    <h3 class="product-name">Sản phẩm 3</h3>
-                    <p class="product-price">1,000,000 VND</p>
-                </div>
-                <div class="product-item">
-                    <img src="product2.jpg" alt="Sản phẩm 4">
-                    <h3 class="product-name">Sản phẩm 4</h3>
-                    <p class="product-price">1,250,000 VND</p>
-                </div>
-                <div class="product-item">
-                    <img src="product3.jpg" alt="Sản phẩm 5">
-                    <h3 class="product-name">Sản phẩm 5</h3>
-                    <p class="product-price">1,500,000 VND</p>
-                </div>
-                <div class="product-item">
-                    <img src="product3.jpg" alt="Sản phẩm 6">
-                    <h3 class="product-name">Sản phẩm 6</h3>
-                    <p class="product-price">1,800,000 VND</p>
+                <div class="post-box sneaker-f1">
+                    <img src="resources/img/post-2.jpg" alt="" class="post-img">
+                    <h2 class="category">Sneaker F1</h2>
+                    <h2 class="category">Giày MLB chunky</h2>
+                    
+                    <a href="post.html" class="post-title">
+                        Mua sản phẩm
+                    </a>
+                    <span class="post-date"></span>
+                    <p class="post-description">
+                        500.000đ
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
+    <script>
+        // Giả lập trạng thái đăng nhập
+        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+        // Kiểm tra trạng thái đăng nhập
+        const authLink = document.getElementById('authLink');
+        if (isLoggedIn) {
+            authLink.innerHTML = '<a href="#" onclick="logout()">Đăng Xuất</a>';
+        } else {
+            authLink.innerHTML = '<a href="login.html">Đăng Nhập</a>';
+        }
+
+        function logout() {
+            // Xử lý đăng xuất ở đây
+            localStorage.removeItem('isLoggedIn'); // Cập nhật trạng thái đăng nhập
+            authLink.innerHTML = '<a href="login.html">Đăng Nhập</a>'; // Đặt lại nút
+            alert('Bạn đã đăng xuất thành công!');
+            // Bạn có thể chuyển hướng về trang chủ hoặc trang khác ở đây
+        }
+    </script>
 </body>
 </html>

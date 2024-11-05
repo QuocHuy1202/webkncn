@@ -27,11 +27,8 @@
     <section class="login-section">
         <div class="container">
             <h2>Đăng Nhập</h2>
-            <div class="error" id="error-message">
-                <!-- Hiển thị thông báo lỗi nếu có -->
-                <p style="color: red;" id="error-text"></p>
-            </div>
-            <form action="http://localhost:3000/login" method="post">
+            
+            <form id="loginForm">
                 <div class="form-group">
                     <label for="username">Tên Đăng Nhập</label>
                     <input type="text" id="username" name="username" required>
@@ -42,22 +39,42 @@
                 </div>
                 <button type="submit" class="btn">Đăng Nhập</button>
                 <p>Bạn chưa có tài khoản? <a href="registration.html">Đăng ký ngay</a></p>
+                <div id="message" style="color: red;"></div> <!-- Thêm phần để hiển thị thông báo lỗi -->
             </form>
         </div>
     </section>
     <script>
-        // Kiểm tra URL để tìm thông báo lỗi
-        const urlParams = new URLSearchParams(window.location.search);
-if (urlParams.has('error')) {
-    const errorMessage = document.getElementById('error-text');
-    const errorType = urlParams.get('error');
+        let isLoggedIn = false;
+        const accounts = [
+            { username: 'admin', password: 'admin123', role: 'admin' }, // Tài khoản admin
+            { username: 'user', password: 'user123', role: 'user' }    // Tài khoản user
+        ];
 
-    if (errorType === 'invalid') {
-        errorMessage.innerText = 'Sai tên đăng nhập hoặc mật khẩu!';
-    } 
-}
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Ngăn không cho form gửi đi
 
-        
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const messageDiv = document.getElementById('message');
+
+            // Kiểm tra tài khoản
+            const account = accounts.find(acc => acc.username === username && acc.password === password);
+
+            if (account) {
+                messageDiv.style.color = 'green';
+                messageDiv.innerText = 'Đăng nhập thành công!';
+
+                // Chuyển hướng dựa trên vai trò
+                if (account.role === 'admin') {
+                    window.location.href = 'orderlist.html'; // Chuyển đến trang admin
+                } else {
+                    localStorage.setItem('isLoggedIn', 'true');
+                    window.location.href = 'product.html'; // Chuyển đến trang user
+                }
+            } else {
+                messageDiv.innerText = 'Tên đăng nhập hoặc mật khẩu không đúng.';
+            }
+        });
     </script>
 </body>
 </html>
